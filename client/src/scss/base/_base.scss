@@ -1,0 +1,35 @@
+@include critical {
+    :root {
+        --color-text: #{get-color(text)};
+        --color-background: #{get-color(background)};
+    
+        --color-primary: #{get-color(primary)};
+        --color-secondary: #{get-color(secondary)};
+        
+        --color-card-base: #{get-color(card-base)};
+        --color-card-secondary: #{lighten(get-color(card-base), 5%)};
+        --color-card-tertiary: #{get-color(card-tertiary)};
+    
+        @for $n from 1 through length(get-color(gradient)) {
+            $g: get-color-gradient-step($n);
+
+            --color-gradient-#{$n}: #{$g};
+            --color-gradient-faded-#{$n}:  #{fade-out($g, .8)};
+            
+            @if ($n < length(get-color(gradient))) {
+                --color-gradient-#{$n}-#{$n+1}: #{mix($g, get-color-gradient-step($n+1))};
+            }
+        }
+    
+        --color-pale-red-1: #{fade-out(get-color-gradient-step(2), .6)};
+        --color-pale-red-2: #{fade-out(get-color-gradient-step(3), .7)};
+    }
+    html body {
+        padding: 0;
+        margin: 0;
+        
+        * {
+            box-sizing: border-box;
+        }
+    }
+}

@@ -1,0 +1,31 @@
+@include critical {
+    .timeline {
+        @extend %flex,
+            %flex--align-center;
+
+        @include position-fixed($top: get-setting('layout', 'header'), $left: -50vw, $right: -50vw, $bottom: 0, $z-index: 100);
+        width: auto;
+        margin: 0;
+        padding: 0;
+
+        &__axis {
+            @include position-absolute($top: 50%, $left: 0, $right: 0, $z-index: -1);
+            width: 100%;
+            height: 25px;
+            background-image: linear-gradient(to right,
+                var(--color-gradient-faded-1) 0%, 15%,
+                var(--color-gradient-faded-2) 30%, 40%,
+                var(--color-gradient-faded-3) 50%, 60%,
+                var(--color-gradient-faded-4) 70%, 85%,
+                var(--color-gradient-faded-5) 100%
+            );
+            transform: translateY(-1 * get-setting(layout, header));
+        }
+        &__events {
+            @extend %flex,
+                %flex--justify-center,
+                %flex--align-center;
+            width: 100%;
+        }
+    }
+}
