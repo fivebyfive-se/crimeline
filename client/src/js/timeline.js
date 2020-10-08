@@ -31,9 +31,8 @@
         {
             date: new Date(1894, 0, 1),
             displayDate: 'Förra året',
-            title: 'Börjar skriva pjäs',
-            actor: 'Maurice Soyer',
-            action: 'börjar skriva pjäs, och efterforska',
+            title: 'MS börjar skriva pjäs',
+            action: '&hellip;och efterforska',
             target: 'Cauda Draconis',
         },
 
