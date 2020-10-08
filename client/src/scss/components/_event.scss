@@ -1,0 +1,50 @@
+@include critical {
+    .event {
+        @include margin-x(2);
+        width: 400px;
+        min-height: 400px;
+
+        background-color: var(--color-card-base);
+        background: radial-gradient(circle at center, var(--color-gradient-faded-3) 0%, var(--color-gradient-faded-5) 100%),
+            linear-gradient(to bottom, var(--color-card-secondary) 0%, var(--color-card-tertiary) 100%);
+        background-blend-mode: screen, color;
+        box-shadow: 3px 3px 5px 2px var(--color-gradient-faded-4);
+
+        &__header {
+            @extend %flex,
+                %flex--wrap,
+                %flex--align-flex-start,
+                %flex--justify-space-between;
+            @include padding(.5);
+        }
+        &__title {
+            @include flex-item-width(100%);
+            @include margin(0);
+            @include font($size: x-large);
+            text-align: center;
+            text-transform: uppercase;
+        }
+        &__location, &__date {
+            @include flex-item-width(50%);
+            @include font($size: small, $style: italic);
+        }
+        &__date {
+            text-align: right;
+        }
+
+        &__details {
+            @include padding(.5, 1);
+            dl, dt, dd {
+                @include font($size: large);
+                margin: 0;
+            }
+        }
+
+        &:nth-child(odd) {
+            transform: translateY(-20%);
+        }
+        &:nth-child(even) {
+            transform: translateY(25%);
+        }
+    }
+}

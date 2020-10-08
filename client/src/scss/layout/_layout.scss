@@ -1,0 +1,48 @@
+@include critical {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .page {
+        @extend %flex,
+            %flex--align-center,
+            %flex--justify-flex-start,
+            %flex--column;
+        width: 100vw;
+        max-width: 100%;
+        overflow: hidden;
+
+        &__header,
+        &__footer {
+            @extend %flex,
+                %flex--row,
+                %flex--align-center,
+                %flex--justify-flex-start;
+
+            max-width: get-setting('grid', 'max-width');
+        }
+
+        &__header {
+            width: 100%;
+        }
+        &__header, &__titles {
+            height: get-setting('layout', 'header');
+        }
+        &__titles {
+            width: 400px;
+        }
+        &__title {
+            @extend %font--xxx-large;
+            line-height: 1;
+            color: var(--color-primary);
+        }
+        &__subtitle {
+            @extend %font--large,
+                %font--bold-italic;
+            line-height: 1;
+            color: var(--color-gradient-5);
+            transform: translate(100%, -100%);
+        }
+    }
+}

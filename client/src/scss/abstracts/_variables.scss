@@ -1,0 +1,80 @@
+$settings: (
+    breakpoint: (
+        mobile: (max-width: 700px),
+        desktop: (min-width: 701px)
+    ),
+
+    layout: (
+        header: 100px
+    ),
+
+    grid: (
+        num-cols: 12,
+        gutter: 4rem,
+        max-width: 1400px
+    ),
+
+    color: (
+        text: #00080D,
+        background: #CCD3D9,
+
+        primary: #D96248,
+        secondary: #E3704A,
+
+        card-base: #d9d0c5,
+        card-secondary: #e3dcd4,
+        card-tertiary: #9C9FA6,
+
+        gradient: (#E6DDCB, #E2A08D, #E3704A, #6B6C77, #2E333F)
+    ),
+
+    rem-height: 11px,
+    rem-height-mobile: 10px,
+
+    font: (
+        family: (
+            body: "'Grenze', serif",
+            heading: "'Grenze', serif"
+        ),
+        style: (
+            light: (
+                weight: 100,
+                style: 'normal'
+            ),
+            italic: (
+                weight: 400,
+                style: 'italic'
+            ),
+            normal: (
+                weight: 300,
+                style: 'normal'
+            ),
+            bold: (
+                weight: 600,
+                style: 'normal'
+            ),
+            bold-italic: (
+                weight: 700,
+                style: 'italic'
+            ),
+            black: (
+                weight: 900,
+                style: 'normal'
+            )
+        ),
+        size: (
+            base: 2, // * 1rem
+            large: 3,
+            x-large: 4,
+            xx-large: 6,
+            xxx-large: 8,
+            small: 1.5,
+            x-small: 1.2
+        ),
+        line-height: (
+            base: 2.5 // * 1rem
+        )
+    )
+);
+
+
