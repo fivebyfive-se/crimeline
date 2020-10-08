@@ -30,7 +30,8 @@
 
     h1, .heading1 { 
         @extend %font--black, %font--xxx-large;
-        }
+        @include font($family: gothic);
+    }
     h2, .heading2 { 
         @extend %font--black, %font--xx-large;
     }

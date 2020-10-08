@@ -23,26 +23,28 @@
             max-width: get-setting('grid', 'max-width');
         }
 
-        &__header {
-            width: 100%;
-        }
         &__header, &__titles {
             height: get-setting('layout', 'header');
+            width: 100%;
         }
         &__titles {
-            width: 400px;
+            @extend %flex,
+                %flex--row,
+                %flex--align-center,
+                %flex--justify-center;
+        }
+        &__title, &__subtitle {
+            @include font($family: 'gothic', $size: xxx-large);
+            line-height: 1;
         }
         &__title {
-            @extend %font--xxx-large;
-            line-height: 1;
+            @extend %font--black;
             color: var(--color-primary);
         }
         &__subtitle {
-            @extend %font--large,
-                %font--bold-italic;
-            line-height: 1;
-            color: var(--color-gradient-5);
-            transform: translate(100%, -100%);
+            @extend %font--normal;
+            color: var(--color-secondary);
+            text-transform: uppercase;
         }
     }
 }

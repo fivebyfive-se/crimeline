@@ -23,9 +23,9 @@
     const events = [
         {
             date: new Date(Date.UTC(1858, 1, 23)),
-            actor: 'Maurice Soyer',
-            action: 'föds',
+            title: 'Maurice Soyer föds',
             location: 'City of Westminster',
+            className: 'no-details'
         },
 
         {
@@ -49,8 +49,8 @@
         {
             date: new Date(1895, 5, 17),
             location: '19 Havelock st, London',
-            actor: 'Maurice Soyer',
-            action: 'dör'
+            title: 'M Soyer dör',
+            className: 'no-details'
         }
     ];
 
@@ -64,6 +64,9 @@
     }).forEach((event) => {
         const tag = document.createElement('article');
         tag.classList.add('event');
+        if (event.className) {
+            tag.classList.add(`event--${event.className}`);
+        }
         tag.innerHTML = parseTemplate(event)
         eventsContainer.appendChild(tag);
     });

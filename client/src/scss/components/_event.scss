@@ -2,7 +2,6 @@
     .event {
         @include margin-x(2);
         width: 400px;
-        min-height: 400px;
 
         background-color: var(--color-card-base);
         background: radial-gradient(circle at center, var(--color-gradient-faded-3) 0%, var(--color-gradient-faded-5) 100%),
@@ -20,7 +19,8 @@
         &__title {
             @include flex-item-width(100%);
             @include margin(0);
-            @include font($size: x-large);
+            @include font($size: xx-large, $style: bold);
+            line-height: 1;
             text-align: center;
             text-transform: uppercase;
         }
@@ -35,8 +35,17 @@
         &__details {
             @include padding(.5, 1);
             dl, dt, dd {
-                @include font($size: large);
                 margin: 0;
+            }
+            dt, dd { display: inline-block; }
+            dt {
+                @include font($size: large);
+                @include font($style: bold-italic);
+            }
+            dd {
+                @include font($size: large);
+                @include font($style: light);
+                @include margin-x(.5);
             }
         }
 
@@ -45,6 +54,16 @@
         }
         &:nth-child(even) {
             transform: translateY(25%);
+        }
+        &--no-details {
+            @include padding-bottom(1);
+            .event__details { display: none }
+        }
+        &:first-child {
+            outline: 2rem solid var(--color-tertiary);
+        }
+        &:last-child {
+            outline: 2rem solid var(--color-quaternary);
         }
     }
 }
