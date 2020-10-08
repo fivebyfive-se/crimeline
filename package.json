@@ -1,0 +1,24 @@
+{
+  "name": "crimeline",
+  "version": "0.1.0",
+  "description": "Web-based timeline tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fivebyfive-se/crimeline.git"
+  },
+  "keywords": [
+    "timeline",
+    "web",
+    "node-js"
+  ],
+  "author": "Kalle Räisänen <kalle@fivebyfive.se>",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/fivebyfive-se/crimeline/issues"
+  },
+  "homepage": "https://github.com/fivebyfive-se/crimeline#readme"
+}
