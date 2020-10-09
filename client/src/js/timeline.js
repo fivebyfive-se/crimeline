@@ -23,23 +23,22 @@
     const events = [
         {
             date: new Date(Date.UTC(1858, 1, 23)),
-            actor: 'Maurice Soyer',
-            action: 'föds',
+            title: 'Maurice Soyer föds',
             location: 'City of Westminster',
+            className: 'no-details'
         },
 
         {
             date: new Date(1894, 0, 1),
             displayDate: 'Förra året',
-            title: 'Börjar skriva pjäs',
-            actor: 'Maurice Soyer',
-            action: 'börjar skriva pjäs, och efterforska',
+            title: 'MS börjar skriva pjäs',
+            action: '&hellip;och efterforska',
             target: 'Cauda Draconis',
         },
 
         {
             date: new Date(1895, 1, 1),
-            displayDate: 'Februari',
+            displayDate: 'Februari \'95',
             title: 'Mrs Lee refuserar pjäs',
             actor: 'Florence Lee',
             action: 'refuserar',
@@ -49,8 +48,8 @@
         {
             date: new Date(1895, 5, 17),
             location: '19 Havelock st, London',
-            actor: 'Maurice Soyer',
-            action: 'dör'
+            title: 'M Soyer dör',
+            className: 'no-details'
         }
     ];
 
@@ -64,6 +63,9 @@
     }).forEach((event) => {
         const tag = document.createElement('article');
         tag.classList.add('event');
+        if (event.className) {
+            tag.classList.add(`event--${event.className}`);
+        }
         tag.innerHTML = parseTemplate(event)
         eventsContainer.appendChild(tag);
     });

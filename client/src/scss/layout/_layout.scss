@@ -2,6 +2,24 @@
     body {
         margin: 0;
         padding: 0;
+
+        color: var(--color-text);
+
+        background-image: linear-gradient(180deg, var(--color-tertiary), var(--color-quaternary) 25%, var(--color-background) 60%, transparent 100%),
+            radial-gradient(circle at center, 
+                #E6DDCB 0%, 14%,
+                #E2A08D 29%, 40%,
+                #E3704A 50%, 60%,
+                #6B6C77 70%,
+                #2E333F 85%,
+                #000 100%
+            ),
+            url(/images/bg.jpg)
+        ;
+        background-size: cover, cover, cover;
+        background-blend-mode:  overlay, multiply, normal;
+        background-position: center, center, bottom center;
+        min-height: 100vh;
     }
 
     .page {
@@ -23,26 +41,47 @@
             max-width: get-setting('grid', 'max-width');
         }
 
-        &__header {
-            width: 100%;
-        }
         &__header, &__titles {
             height: get-setting('layout', 'header');
+            width: 100%;
         }
         &__titles {
-            width: 400px;
+            @extend %flex,
+                %flex--row,
+                %flex--align-center,
+                %flex--justify-center;
+            text-shadow: 3px 3px 5px  var(--color-text);
+        }
+        &__title, &__subtitle {
+            @include font($family: 'gothic', $size: xxx-large);
+            line-height: 1;
         }
         &__title {
-            @extend %font--xxx-large;
-            line-height: 1;
+            @extend %font--black;
             color: var(--color-primary);
         }
         &__subtitle {
-            @extend %font--large,
-                %font--bold-italic;
-            line-height: 1;
-            color: var(--color-gradient-5);
-            transform: translate(100%, -100%);
+            @extend %font--normal;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+        }
+
+    }
+}
+
+@include non-critical {
+    .page {
+        &:after {
+            @include position-fixed($top: -20vh, $bottom: -20vh, $right: -20vw, $left: -20vw, $z-index: -10);
+            animation: grain 8s steps(10) infinite;
+            width: auto;
+            height: auto;
+            content: '';
+            background-image: url(/images/noise_lines.png);
+            background-repeat: repeat;
+            mix-blend-mode: multiply;
+            filter: brightness(25%);
+            opacity: .2;
         }
     }
 }

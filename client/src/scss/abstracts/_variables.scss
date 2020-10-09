@@ -15,15 +15,20 @@ $settings: (
     ),
 
     color: (
-        text: #00080D,
-        background: #CCD3D9,
+        text:  #261E21,
+        text-secondary: #735656,
+        background: #BFAB99,
 
-        primary: #D96248,
-        secondary: #E3704A,
 
-        card-base: #d9d0c5,
-        card-secondary: #e3dcd4,
-        card-tertiary: #9C9FA6,
+        primary: #73281F,
+        secondary: #146F73,
+
+        tertiary: #377330,
+        quaternary:  #BF4A3D,
+
+        card-base: #BFB0AA,
+        card-secondary: lighten(#BFB0AA, 5%),
+        card-tertiary: darken(#BFB0AA, 5%),
 
         gradient: (#E6DDCB, #E2A08D, #E3704A, #6B6C77, #2E333F)
     ),
@@ -34,7 +39,8 @@ $settings: (
     font: (
         family: (
             body: "'Grenze', serif",
-            heading: "'Grenze', serif"
+            heading: "'Grenze', serif",
+            gothic: "'Grenze Gotisch', 'Grenze', serif"
         ),
         style: (
             light: (
@@ -67,7 +73,7 @@ $settings: (
             large: 3,
             x-large: 4,
             xx-large: 6,
-            xxx-large: 8,
+            xxx-large: 10,
             small: 1.5,
             x-small: 1.2
         ),

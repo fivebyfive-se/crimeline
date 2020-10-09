@@ -5,6 +5,8 @@
     
         --color-primary: #{get-color(primary)};
         --color-secondary: #{get-color(secondary)};
+        --color-tertiary: #{get-color(tertiary)};
+        --color-quaternary: #{get-color(quaternary)};
         
         --color-card-base: #{get-color(card-base)};
         --color-card-secondary: #{lighten(get-color(card-base), 5%)};
@@ -15,7 +17,7 @@
 
             --color-gradient-#{$n}: #{$g};
             --color-gradient-faded-#{$n}:  #{fade-out($g, .8)};
-            
+
             @if ($n < length(get-color(gradient))) {
                 --color-gradient-#{$n}-#{$n+1}: #{mix($g, get-color-gradient-step($n+1))};
             }
