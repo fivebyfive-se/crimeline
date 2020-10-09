@@ -53,15 +53,16 @@
             text-shadow: 3px 3px 5px  var(--color-text);
         }
         &__title, &__subtitle {
-            @include font($family: 'gothic', $size: xxx-large);
+            @extend %font--gothic;
             line-height: 1;
         }
         &__title {
-            @extend %font--black;
+            @extend %font--black, %font--xxx-large;
             color: var(--color-primary);
         }
         &__subtitle {
-            @extend %font--normal;
+            @extend %font--normal, %font--xx-large;
+            @include margin-top(.5);
             color: var(--color-secondary);
             text-transform: uppercase;
         }
