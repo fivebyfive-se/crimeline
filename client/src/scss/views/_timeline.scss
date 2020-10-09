@@ -66,7 +66,7 @@
             %font--light;
             
         @include position-absolute($top: 50%);
-        width: 200px;
+        width: 220px;
 
         background-color: var(--color-card-base);
         background: radial-gradient(circle at center, var(--color-gradient-faded-3) 0%, var(--color-gradient-faded-5) 100%),
@@ -112,22 +112,9 @@
                 %font--xx-small;
 
             @include padding(.5);
-            dl, dt, dd {
-                margin: 0;
-                padding: 0;
-                line-height: 1;
-            }
-            dt, dd { display: block; }
-            dt {
-                text-transform: uppercase;
-            }
-            dd {
-                @extend %font--normal,
-                    %font--xx-small;              
-                @include margin-left(1);
-                &.event__action {
-                    @extend %font--italic;
-                }
+            .event__actor,
+            .event__target {
+                @extend %font--normal;
             }
         }
         &--no-details {

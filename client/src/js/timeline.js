@@ -17,13 +17,11 @@ orthogonal.onReady(($linear, $dom) => {
     <h1 class="event__title">{{title}}</h1>
 </header>
 <main>
-    <dl class="event__details">
-    <dt>vem?</dt>
-        <dd class="event__actor">{{actor}}</dd>
-    <dt>vad?</dt>
-        <dd class="event__action">{{action}}</dd>
-        <dd class="event__target">{{target}}</dd>
-    </dl>
+    <p class="event__details">
+        <span class="event__actor">{{actor}}</span>
+        <span class="event__action">{{action}}</span>
+        <span class="event__target">{{target}}</span>
+    </p>
 </main>
 `;
     const parseTemplate = (event) => Object.keys(event)
