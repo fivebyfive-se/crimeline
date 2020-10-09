@@ -1,0 +1,41 @@
+include mixins/_classes.pug
+include mixins/_grid.pug
+include mixins/_remixicon.pug
+include mixins/_scripts.pug
+
+
+doctype html
+html(lang=lang, data-theme=theme)
+    head
+        title crimeline
+        block head
+
+        link(rel='stylesheet', href='/css/critical.css')
+    body
+        article.page
+            header.page__header
+                hgroup.page__titles
+                    h1.page__title Crime/Line
+                    h2.page__subtitle &#8605;Vem?&#8621;Vad?&#8621;När?
+            
+            block content
+
+            footer.page__footer
+
+
+        //- icons:
+        link(rel='stylesheet', href='//cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css')
+        
+        //- fonts:
+        link(href="https://fonts.googleapis.com/css2?family=Grenze:ital,wght@0,100;0,300;0,600;0,900;1,400;1,700&display=swap", rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100;300;900&display=swap", rel="stylesheet")
+        
+        //- orthogonal:
+        +orthogonal-script()
+        +orthogonal-script('extensions', 'beta')
+
+        link(rel='stylesheet', href='/css/non-critical.css')
+        +renderScripts()
+        
+        block styles
+        block scripts

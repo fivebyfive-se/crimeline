@@ -1,0 +1,153 @@
+@include critical {
+    .timeline {
+        @include position-fixed($top: get-setting('layout', 'header'), $left: -50vw, $right: -50vw, $bottom: 0, $z-index: 100);
+        width: auto;
+        margin: 0;
+        padding: 0;
+
+        &__axis {
+            @include position-absolute($top: 40%, $left: 0, $right: 0, $z-index: -1);
+            width: 100%;
+            height: 4rem;
+            background-image: linear-gradient(to right,
+                var(--color-gradient-1) 0%, 15%,
+                var(--color-gradient-2) 30%, 40%,
+                var(--color-gradient-faded-3) 50%, 60%,
+                var(--color-gradient-4) 70%, 85%,
+                var(--color-gradient-5) 100%
+            ),
+                repeating-linear-gradient(to right, transparent 0, 1.5rem, var(--color-primary) 1.5rem, var(--color-secondary) 3rem)
+            ;
+
+            .axis__stop {
+                @include position-absolute($top: -2rem);
+                height: 4rem;
+                width: auto;
+            }
+        }
+        &__events {
+            @include position-absolute($top: 0, $left: 0, $right: 0, $bottom: 0, $z-index: 1);
+            width: 100%;
+            transform-style: preserve-3d;
+
+        }
+
+        &__controls {
+            @extend %flex,
+                %flex--justify-space-between;
+            @include position-absolute($bottom: 2rem, $left: 50%, $z-index: 10);
+            width: 400px;
+
+            transform: translateX(-50%);
+            .buttons {
+                @include margin-x(.5);
+            }
+            .button {
+                @extend %font--large;
+                @include padding(.5, 1);
+                display: inline-block;
+                background: var(--color-gradient-faded-1);
+                border: none;
+
+                color: var(--color-tertiary);
+                cursor: pointer;
+                &:hover, &:focus {
+                    background: var(--color-gradient-1);
+                    border: none;
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    .event {
+        @extend %font--body,
+            %font--small,
+            %font--light;
+            
+        @include position-absolute($top: 50%);
+        width: 200px;
+
+        background-color: var(--color-card-base);
+        background: radial-gradient(circle at center, var(--color-gradient-faded-3) 0%, var(--color-gradient-faded-5) 100%),
+            linear-gradient(to bottom, var(--color-card-secondary) 0%, var(--color-card-tertiary) 100%);
+        background-blend-mode: screen, color;
+        box-shadow: 3px 3px 5px 2px var(--color-gradient-faded-4);
+
+        transform: translateY(-40%);
+
+        &__header {
+            @extend %flex,
+                %flex--wrap,
+                %flex--align-flex-start,
+                %flex--justify-space-between;
+            @include padding(.5);
+        }
+        &__title {
+            @extend %font--heading, 
+                %font--small, 
+                %font--bold;
+            @include flex-item-width(100%);
+            @include margin(0);
+            line-height: 1;
+            text-align: center;
+            text-transform: uppercase;
+            &::first-letter {
+                @extend %font--gothic, %font--large, %font--black;
+                display: inline-block;
+                color: var(--color-primary);
+            }
+        }
+        &__location, &__date {
+            @include flex-item-width(50%);
+            @include font($size: xx-small, $style: light);
+            text-transform: uppercase;
+        }
+        &__date {
+            text-align: right;
+        }
+
+        &__details {
+            @extend %font--light,
+                %font--xx-small;
+
+            @include padding(.5);
+            dl, dt, dd {
+                margin: 0;
+                padding: 0;
+                line-height: 1;
+            }
+            dt, dd { display: block; }
+            dt {
+                text-transform: uppercase;
+            }
+            dd {
+                @extend %font--normal,
+                    %font--xx-small;              
+                @include margin-left(1);
+                &.event__action {
+                    @extend %font--italic;
+                }
+            }
+        }
+        &--no-details {
+            @include padding-bottom(1);
+            .event__details { display: none }
+        }
+        &--highlight {
+            outline: 1rem solid var(--color-text);
+            transform: translateY(-150%);
+
+            &--primary {
+                outline-color: var(--color-primary);
+            }
+            &--secondary {
+                outline-color: var(--color-secondary);
+            }
+        }
+        &--detail {
+            margin-left: -100px;
+            transform: translateY(-20%);
+        }
+    }
+}

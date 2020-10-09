@@ -1,0 +1,19 @@
+extends _layout.pug
+
+block content
+    main.page__content.timeline
+        section.timeline__axis
+        section.timeline__events
+        section.timeline__controls
+            .buttons.buttons--scroll
+                button.button.button--left
+                    i.ri-arrow-left-line
+                button.button.button--right
+                    i.ri-arrow-right-line
+            .buttons.buttons--zoom
+                button.button.button--zoom-in
+                    i.ri-zoom-in-line
+                button.button.button--zoom-out
+                    i.ri-zoom-out-line
+        
+    +script('/js/timeline.js')

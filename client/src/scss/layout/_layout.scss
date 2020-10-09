@@ -1,0 +1,87 @@
+@include critical {
+    body {
+        margin: 0;
+        padding: 0;
+
+        color: var(--color-text);
+
+        background-image: linear-gradient(180deg, var(--color-tertiary), var(--color-quaternary) 25%, var(--color-background) 60%, transparent 100%),
+            radial-gradient(circle at center, 
+                #E6DDCB 0%, 14%,
+                #E2A08D 29%, 40%,
+                #E3704A 50%, 60%,
+                #6B6C77 65%,
+                #2E333F 75%,
+                #000 100%
+            ),
+            url(/images/bg.jpg)
+        ;
+        background-size: cover, cover, cover;
+        background-blend-mode:  overlay, multiply, normal;
+        background-position: center, center, bottom center;
+        min-height: 100vh;
+    }
+
+    .page {
+        @extend %flex,
+            %flex--align-center,
+            %flex--justify-flex-start,
+            %flex--column;
+        width: 100vw;
+        max-width: 100%;
+        overflow: hidden;
+
+        &__header,
+        &__footer {
+            @extend %flex,
+                %flex--row,
+                %flex--align-center,
+                %flex--justify-flex-start;
+
+            max-width: get-setting('grid', 'max-width');
+        }
+
+        &__header, &__titles {
+            height: get-setting('layout', 'header');
+            width: 100%;
+        }
+        &__titles {
+            @extend %flex,
+                %flex--row,
+                %flex--align-center,
+                %flex--justify-center;
+            text-shadow: 3px 3px 5px  var(--color-text);
+        }
+        &__title, &__subtitle {
+            @extend %font--gothic;
+            line-height: 1;
+        }
+        &__title {
+            @extend %font--black, %font--xxx-large;
+            color: var(--color-primary);
+        }
+        &__subtitle {
+            @extend %font--normal, %font--xx-large;
+            @include margin-top(.5);
+            color: var(--color-secondary);
+            text-transform: uppercase;
+        }
+
+    }
+}
+
+@include non-critical {
+    .page {
+        &:after {
+            @include position-fixed($top: -20vh, $bottom: -20vh, $right: -20vw, $left: -20vw, $z-index: -10);
+            animation: grain 8s steps(10) infinite;
+            width: auto;
+            height: auto;
+            content: '';
+            background-image: url(/images/noise_lines.png);
+            background-repeat: repeat;
+            filter: invert(100%);
+            opacity: .5;
+        }
+    }
+}

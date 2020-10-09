@@ -1,0 +1,88 @@
+$settings: (
+    breakpoint: (
+        mobile: (max-width: 700px),
+        desktop: (min-width: 701px)
+    ),
+
+    layout: (
+        header: 100px
+    ),
+
+    grid: (
+        num-cols: 12,
+        gutter: 4rem,
+        max-width: 1400px
+    ),
+
+    color: (
+        text:  #261E21,
+        text-secondary: #735656,
+        background: #BFAB99,
+
+
+        primary: #73281F,
+        secondary: #146F73,
+
+        tertiary: #377330,
+        quaternary:  #BF4A3D,
+
+        card-base: #BFB0AA,
+        card-secondary: lighten(#BFB0AA, 5%),
+        card-tertiary: darken(#BFB0AA, 5%),
+
+        gradient: (#E6DDCB, #E2A08D, #E3704A, #6B6C77, #2E333F)
+    ),
+
+    rem-height: 11px,
+    rem-height-mobile: 10px,
+
+    font: (
+        family: (
+            body: "'Grenze', serif",
+            heading: "'Grenze', serif",
+            gothic: "'Grenze Gotisch', 'Grenze', serif"
+        ),
+        style: (
+            light: (
+                weight: 100,
+                style: 'normal'
+            ),
+            italic: (
+                weight: 400,
+                style: 'italic'
+            ),
+            normal: (
+                weight: 300,
+                style: 'normal'
+            ),
+            bold: (
+                weight: 600,
+                style: 'normal'
+            ),
+            bold-italic: (
+                weight: 700,
+                style: 'italic'
+            ),
+            black: (
+                weight: 900,
+                style: 'normal'
+            )
+        ),
+        size: (
+            base: 2, // * 1rem
+            large: 3,
+            x-large: 4,
+            xx-large: 6,
+            xxx-large: 8,
+            small: 1.75,
+            x-small: 1.5,
+            xx-small: 1.25,
+            xxx-small: 1
+        ),
+        line-height: (
+            base: 2.5 // * 1rem
+        )
+    )
+);
+
+
