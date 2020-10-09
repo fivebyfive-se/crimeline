@@ -38,7 +38,7 @@
 
         {
             date: new Date(1895, 1, 1),
-            displayDate: 'Februari',
+            displayDate: 'Februari \'95',
             title: 'Mrs Lee refuserar pjäs',
             actor: 'Florence Lee',
             action: 'refuserar',
