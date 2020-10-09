@@ -10,8 +10,8 @@
                 #E6DDCB 0%, 14%,
                 #E2A08D 29%, 40%,
                 #E3704A 50%, 60%,
-                #6B6C77 70%,
-                #2E333F 85%,
+                #6B6C77 65%,
+                #2E333F 75%,
                 #000 100%
             ),
             url(/images/bg.jpg)
@@ -80,9 +80,8 @@
             content: '';
             background-image: url(/images/noise_lines.png);
             background-repeat: repeat;
-            mix-blend-mode: multiply;
-            filter: brightness(25%);
-            opacity: .2;
+            filter: invert(100%);
+            opacity: .5;
         }
     }
 }
