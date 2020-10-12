@@ -4,12 +4,51 @@ block content
     main.page__content.timeline
         section.timeline__axis
         section.timeline__events
+        section.timeline__cipher.row
+            .cipher__section.cipher__section--text.col.col--6
+                pre#cipher-input.cipher__content.cipher__content--input
+                pre#cipher-output.cipher__content.cipher__content--output
+                pre#cipher-output-rot.cipher__content.cipher__content--output.cipher__content--output--rot
+
+            .cipher__section.cipher__section--stats.col.col--6
+                .cipher__stats
+                    #cipher-stats
+                    #cipher-stats-rot
+
+                .cipher__settings
+                    .settings 
+                        h4 Columns
+                        input#cipher-settings-columns.settings__field.settings__field--input(value="0123456789ab")
+                        button#cipher-settings-reset-button.settings__field.settings__field--button
+                            i.ri-arrow-go-back-line
+                            | Reset
+                        button#cipher-settings-randomize-button.settings__field.settings__field--button
+                            i.ri-shuffle-line
+                            | Randomize
+                        button#cipher-settings-apply-button.settings__field.settings__field--button
+                            i.ri-save-line
+                            | Apply
+                    .settings 
+                        h4 Rot
+                        input#cipher-settings-rot.settings__field.settings__field--input(value="0",type="number",min="0",max="25")
+                        button#cipher-settings-rot-reset-button.settings__field.settings__field--button
+                            i.ri-arrow-go-back-line
+                            | Reset
+                        button#cipher-settings-rot-randomize-button.settings__field.settings__field--button
+                            i.ri-shuffle-line
+                            | Randomize
+                        button#cipher-settings-rot-apply-button.settings__field.settings__field--button
+                            i.ri-save-line
+                            | Apply
         section.timeline__controls
             .buttons.buttons--scroll
                 button.button.button--left
                     i.ri-arrow-left-line
                 button.button.button--right
                     i.ri-arrow-right-line
+            .buttons.buttons--control
+                button.button.button--cipher
+                    i.ri-code-s-slash-line
             .buttons.buttons--zoom
                 button.button.button--zoom-in
                     i.ri-zoom-in-line

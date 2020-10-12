@@ -59,6 +59,9 @@
     &--gothic {
         @include font($family: 'gothic');
     }
+    &--monospace {
+        @include font($family: 'monospace');
+    }
 
     @each $style, $rules in get-setting('font', 'style') {
         &--#{$style} {
