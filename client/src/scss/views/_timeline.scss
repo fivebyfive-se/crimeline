@@ -45,6 +45,7 @@
                 %flex--justify-center,
                 %flex--align-center;
             @include position-absolute($top: 0, $left: 50%, $z-index: 10);
+            background-color: var(--color-gradient-faded-5);
             width: 100vw;
             height: 0;
             overflow: hidden;
