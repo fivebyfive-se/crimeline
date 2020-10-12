@@ -3,10 +3,36 @@ extends _layout.pug
 block content
     main.page__content.timeline
         section.timeline__axis
+            each time in timeline.axis
+                .axis__position(data-axis-position=time)
+                    time.axis__time= time
+
         section.timeline__events
+            each time in timeline.axis
+                .axis__position(data-axis-position=time)
+                    each event in timeline.events.filter((e) => e.position === time)
+                        artice.event(data-event-position=event.position)
+                            header.event__header
+                                address.event__location= event.location
+                                time.event__date= event.displayDate
+                                h1.event__title= event.title
+                            main.event__details
+                                span.event__actor= event.actor
+                                span.event__action= event.action
+                                span.event__target= event.target
+                            if event.subevents
+                                footer.event__subevents
+                                    each subevent in event.subevents
+                                        h2.subevent__title= subevent.title
+                                        .subevent__details
+                                            span.subevent__actor= subevent.actor
+                                            span.subevent__action= subevent.action
+                                            span.subevent__target= subevent.target
+
+
         section.timeline__cipher.row
             .cipher__section.cipher__section--text.col.col--6
-                pre#cipher-input.cipher__content.cipher__content--input
+                pre#cipher-input.cipher__content.cipher__content--input= timeline.cipher.join("\n")
                 pre#cipher-output.cipher__content.cipher__content--output
                 pre#cipher-output-rot.cipher__content.cipher__content--output.cipher__content--output--rot
 

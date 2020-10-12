@@ -28,124 +28,11 @@ Array.prototype.shuffle = function shuffle_array() {
 registerExtensions(extensionsServices);
 
 orthogonal.onReady(($linear, $dom) => {
-    const eventTemplate =`
-<header class="event__header">
-    <address class="event__location">{{location}}</address>
-    <time class="event__date" datetime="{{fullDate}}">{{displayDate}}</time>
-    <h1 class="event__title">{{title}}</h1>
-</header>
-<main>
-    <p class="event__details">
-        <span class="event__actor">{{actor}}</span>
-        <span class="event__action">{{action}}</span>
-        <span class="event__target">{{target}}</span>
-    </p>
-</main>
-`;
-    const parseTemplate = (event) => Object.keys(event)
-        .reduce((prev, k) => prev.replaceAll(`{{${k}}}`, event[k]), eventTemplate)
-        .replace(/\{\{[a-z]+\}\}/gi, '');
-
     const axisContainer = document.querySelector('.timeline__axis');
     const eventsContainer = document.querySelector('.timeline__events');
 
     const cosineSmooth = (t) => .5 * (1 + Math.cos((1 - t) * Math.PI));
-    
-    const events = [
-        {
-            date: new Date(Date.UTC(1894, 0, 1)),
-            displayDate: 'Feb 23 1858',
-            title: 'Maurice Soyer föds',
-            location: 'City of Westminster',
-            className: 'no-details highlight highlight--secondary'
-        },
 
-        {
-            date: new Date(Date.UTC(1894, 10, 1)),
-            displayDate: 'Förra året',
-            title: 'MS börjar skriva pjäs',
-            action: '&hellip;och efterforska',
-            target: 'Cauda Draconis',
-        },
-
-        {
-            date: new Date(Date.UTC(1895, 1, 1)),
-            displayDate: 'Februari',
-            title: 'Mrs Lee refuserar pjäs',
-            actor: 'Florence Lee',
-            action: 'refuserar',
-            target: 'Maurice Soyer',
-        },
-
-        {
-            date: new Date(Date.UTC(1895, 2, 20)),
-            displayDate: 'Februari/mars? \'95',
-            title: 'Telleson finansierar',
-            actor: 'A Telleson',
-            action: 'finansierar',
-            target: 'Maurice Soyer',
-        },
-
-        {
-            date: new Date(Date.UTC(1895, 5, 13)),
-            displayDate: '14-15 juni 1895',
-            title: 'Symbolen på dörren',
-            actor: 'Cauda draconis (?)',
-            action: 'ristar in symbol hos',
-            target: 'Maurice Soyer',
-        },
-
-        {
-            date: new Date(Date.UTC(1895, 5, 17)),
-            location: '19 Havelock st, London',
-            title: 'Morddagen',
-            className: 'no-details highlight highlight--primary'
-        },
-
-        {
-            date: new Date(Date.UTC(1895, 5, 17, 8, 0, 0)),
-            displayDate: 'Morddagen',
-            location: '19 Havelock st',
-            title: 'Morgon',
-            actor: 'Maurice Soyer',
-            action: 'besöker Baker St.',
-            className: 'detail'
-        },
-
-        {
-            date: new Date(Date.UTC(1895, 5, 17, 22, 4, 0)),
-            displayDate: 'Morddagen',
-            location: '19 Havelock st',
-            title: 'kl 10:04 pm',
-            actor: 'Watson',
-            action: 'anländer Soyers hus',
-            className: 'detail'
-        },
-
-        {
-            date: new Date(Date.UTC(1895, 5, 17, 22, 55, 0)),
-            displayDate: 'Morddagen',
-            location: '19 Havelock st',
-            title: 'strax innan 11',
-            actor: 'Soyer',
-            action: 'lämnar huset',
-            className: 'detail'
-        }
-    ];
-
-    const cipher_text = `E.TSAURTEP E
-,DDOA ,RNI.W
-DR SEXDK YUR
-ELVAF. RVECT
-BSLIRG.AEM.,
-XLILGAMASM ,
-GDNRIANTOETL
-O NAERN ETGB
-R.,SEUMGEA.M
-,SXIDOERYFCL
-AA RLEETD TY
-AOMA KC IRDE`;
-    const cipher_lines = cipher_text.split("\n");
     const cipher_input = document.getElementById('cipher-input');
     const cipher_output = document.getElementById('cipher-output');
     const cipher_output_rot = document.getElementById('cipher-output-rot');
@@ -154,8 +41,11 @@ AOMA KC IRDE`;
     const randomize_button  = document.getElementById('cipher-settings-randomize-button');
     const reset_button  = document.getElementById('cipher-settings-reset-button');
     const default_columns  = '0123456789AB'.split('');
+
+    const cipher_text = cipher_input.textContent;
+    const cipher_lines = cipher_text.split("\n");
+
     settings_columns.value = default_columns.join('');
-    cipher_input.textContent = default_columns.join('') + "\n" + cipher_text;
 
     const rot_letters = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
     const settings_rot = document.getElementById('cipher-settings-rot');
@@ -169,6 +59,7 @@ AOMA KC IRDE`;
         const cipher_result_lines = cipher_lines.map((l) => {
             return columns.map((c) => l[c]).join('');
         });
+        cipher_input.textContent = default_columns.join('') + "\n" + cipher_text;
         cipher_output.textContent = columns.map(c => c.toString(16).toUpperCase()).join('') + "\n" + cipher_result_lines.join("\n");
         update_cipher_rot_result();
     };
@@ -239,41 +130,6 @@ AOMA KC IRDE`;
 
     reset_columns();
 
-
-
-    const eventStats = events.reduce((stats, event, i) => {
-        const diff = i > 0 ? Math.floor((event.date - events[i-1].date) / (1000 * 60 * 60)) : 0;
-        event.diff = diff;
-        return {
-            minDiff: !stats.minDiff || diff < stats.minDiff ? diff : stats.minDiff,
-            maxDiff: !stats.maxDiff || diff > stats.maxDiff ? diff : stats.maxDiff
-        };
-    }, { minDiff: null, maxDiff: null });
-
-    const timelineWidth = eventsContainer.getBoundingClientRect().width;
-    const eventStep = (1 / events.length) * timelineWidth;
-    let currStep = 0;
-    events.map((event) => {
-        return {
-            ...event,
-            displayDate: event.displayDate || event.date.toLocaleDateString(),
-            fullDate: event.date.toISOString(),
-            title: event.title || [event.actor, event.action, event.target].filter((s) => !!s).join(' ')
-        };
-    }).forEach((event, i) => {
-        const tag = document.createElement('article');
-        const stepRatio = event.diff / eventStats.maxDiff;
-        currStep += .5 * eventStep + eventStep * stepRatio;
-
-        tag.classList.add('event');
-        tag.style.left = parseInt(currStep) + 'px';
-
-        if (event.className) {
-            tag.classList.add(...event.className.split(' ').map(c => `event--${c}`));
-        }
-        tag.innerHTML = parseTemplate(event)
-        eventsContainer.appendChild(tag);
-    });
     let currScroll = 0,
         currScale = 1.0,
         currAxisScale = 1.0,
@@ -282,13 +138,13 @@ AOMA KC IRDE`;
     
     const updatePosition = (delta, isZoom) => {
         const deltaScale = delta / 500,
-            axisSmoothing = cosineSmooth(deltaScale * 2);
+            axisSmoothing = cosineSmooth(deltaScale * 4);
         if (isZoom) {
             currScale += deltaScale;
             currAxisScale += deltaScale * axisSmoothing;
         } else {
-            currScroll -= delta;
-            currAxisScroll -= delta * axisSmoothing * currScale;
+            currScroll -= delta * 2;
+            currAxisScroll -= delta * 1.9;
         }
         axisContainer.style.transform = `translateX(${currAxisScroll}px) scale(${currAxisScale})`;
         eventsContainer.style.transform = `translateX(${currScroll}px) scale(${currScale})`;
@@ -301,8 +157,8 @@ AOMA KC IRDE`;
 
     document.querySelector('.button--zoom-out').addEventListener('click', (e) => updatePosition(-50, true));
     document.querySelector('.button--zoom-in').addEventListener('click', (e) => updatePosition(50, true));
-    document.querySelector('.button--left').addEventListener('click', (e) => updatePosition(-50, false));
-    document.querySelector('.button--right').addEventListener('click', (e) => updatePosition(50, false));
+    document.querySelector('.button--left').addEventListener('click', (e) => updatePosition(-150, false));
+    document.querySelector('.button--right').addEventListener('click', (e) => updatePosition(150, false));
 
     document.querySelector('.button--cipher').addEventListener('click', (e) => document.querySelector('.timeline').classList.toggle('cipher__active'));
 });

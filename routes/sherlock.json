@@ -1,0 +1,100 @@
+{
+  "title": "Ok, Sherlock",
+  "axis": [
+    "1858", "1860", "1870", "1880", "1890",
+    "1894",
+    "1895-01",
+    "1895-02",
+    "1895-03",
+    "1895-04",
+    "1895-05",
+    "1895-06",
+    "1895-06-01",
+    "1895-06-14",
+    "1895-06-15",
+    "1895-06-16",
+    "1895-06-17"
+  ],
+  "events": [
+    {
+      "position": "1858",
+      "displayDate": "Feb 23 1858",
+      "title": "Maurice Soyer föds",
+      "location": "City of Westminster"
+    },
+
+    {
+      "position": "1894",
+      "displayDate": "Förra året",
+      "title": "MS börjar skriva pjäs",
+      "action": "&hellip;och efterforska",
+      "target": "Cauda Draconis"
+    },
+
+    {
+      "position": "1895-02",
+      "displayDate": "Februari",
+      "title": "Mrs Lee refuserar pjäs",
+      "actor": "Florence Lee",
+      "action": "refuserar",
+      "target": "Maurice Soyer"
+    },
+
+    {
+      "position": "1895-03",
+      "displayDate": "Februari/mars? '95",
+      "title": "Telleson finansierar",
+      "actor": "A Telleson",
+      "action": "finansierar",
+      "target": "Maurice Soyer"
+    },
+
+    {
+      "position": "1895-06-14",
+      "displayDate": "14-15 juni 1895",
+      "title": "Symbolen på dörren",
+      "actor": "Cauda draconis (?)",
+      "action": "ristar in symbol hos",
+      "target": "Maurice Soyer"
+    },
+
+    {
+      "position": "1895-06-17",
+      "location": "19 Havelock st, London",
+      "title": "Morddagen",
+      "subevents": [
+        {
+          "title": "Morgon",
+          "actor": "Maurice Soyer",
+          "action": "besöker Baker St."
+        },
+
+        {
+          "title": "kl 10:04 pm",
+          "actor": "Watson",
+          "action": "anländer Soyers hus"
+        },
+
+        {
+          "title": "strax innan 11",
+          "actor": "Soyer",
+          "action": "lämnar huset"
+        }
+      ]
+    }
+  ],
+  "cipher": [
+      "E.TSAURTEP E",
+      ",DDOA ,RNI.W",
+      "DR SEXDK YUR",
+      "ELVAF. RVECT",
+      "BSLIRG.AEM.,",
+      "XLILGAMASM ,",
+      "GDNRIANTOETL",
+      "O NAERN ETGB",
+      "R.,SEUMGEA.M",
+      ",SXIDOERYFCL",
+      "AA RLEETD TY",
+      "AOMA KC IRDE"
+  ]
+}
