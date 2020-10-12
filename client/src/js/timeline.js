@@ -7,6 +7,24 @@ Date.prototype.daysFrom = function (b) {
     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 };
 
+Array.prototype.shuffle = function shuffle_array() {
+    const result = [...this];
+    let currentIndex = result.length;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      const randomIndex = Math.floor(Math.random() * currentIndex);
+      const temporaryValue = result[--currentIndex];
+  
+      // And swap it with the current element.
+      result[currentIndex] = result[randomIndex];
+      result[randomIndex] = temporaryValue;
+    }
+  
+    return result;
+};
+
 registerExtensions(extensionsServices);
 
 orthogonal.onReady(($linear, $dom) => {
@@ -115,6 +133,114 @@ orthogonal.onReady(($linear, $dom) => {
         }
     ];
 
+    const cipher_text = `E.TSAURTEP E
+,DDOA ,RNI.W
+DR SEXDK YUR
+ELVAF. RVECT
+BSLIRG.AEM.,
+XLILGAMASM ,
+GDNRIANTOETL
+O NAERN ETGB
+R.,SEUMGEA.M
+,SXIDOERYFCL
+AA RLEETD TY
+AOMA KC IRDE`;
+    const cipher_lines = cipher_text.split("\n");
+    const cipher_input = document.getElementById('cipher-input');
+    const cipher_output = document.getElementById('cipher-output');
+    const cipher_output_rot = document.getElementById('cipher-output-rot');
+    const settings_columns = document.getElementById('cipher-settings-columns');
+    const settings_button  = document.getElementById('cipher-settings-apply-button');
+    const randomize_button  = document.getElementById('cipher-settings-randomize-button');
+    const reset_button  = document.getElementById('cipher-settings-reset-button');
+    const default_columns  = '0123456789AB'.split('');
+    settings_columns.value = default_columns.join('');
+    cipher_input.textContent = default_columns.join('') + "\n" + cipher_text;
+
+    const rot_letters = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
+    const settings_rot = document.getElementById('cipher-settings-rot');
+    const settings_apply_rot_button  = document.getElementById('cipher-settings-rot-apply-button');
+    const randomize_rot_button  = document.getElementById('cipher-settings-rot-randomize-button');
+    const reset_rot_button  = document.getElementById('cipher-settings-rot-reset-button');
+
+
+    const update_cipher_result = () => {
+        const columns = settings_columns.value.split('').map((c) => parseInt(c, 16));
+        const cipher_result_lines = cipher_lines.map((l) => {
+            return columns.map((c) => l[c]).join('');
+        });
+        cipher_output.textContent = columns.map(c => c.toString(16).toUpperCase()).join('') + "\n" + cipher_result_lines.join("\n");
+        update_cipher_rot_result();
+    };
+    const randomize_columns = () => {
+        settings_columns.value = settings_columns.value.split('').shuffle().join('');
+        update_cipher_result();
+    };
+    const reset_columns = () => {
+        settings_columns.value = default_columns.join('');
+        update_cipher_result();
+    };
+
+    const update_cipher_rot_result = () => {
+        const rot = parseInt(settings_rot.value);
+        const cipher_result_lines = cipher_output.textContent.split("\n").slice(1).join("\n");
+        cipher_output_rot.textContent = `ROT:${rot}\n` + cipher_result_lines.split('').map((c) => {
+            if (rot_letters.includes(c)) {
+                return rot_letters[(rot_letters.indexOf(c) + rot) % rot_letters.length];
+            }
+            return c;
+        }).join('');
+        update_stats();
+    };
+    const randomize_rot = () => {
+        settings_rot.value = Math.floor(25 * Math.random());
+        update_cipher_rot_result();
+    };
+    const reset_rot = () => {
+        settings_rot.value = 0;
+        update_cipher_rot_result();
+    };
+
+    randomize_button.addEventListener('click', () => randomize_columns());
+    settings_button.addEventListener('click', () => update_cipher_result());
+    reset_button.addEventListener('click', () => reset_columns());
+
+    randomize_rot_button.addEventListener('click', () => randomize_rot());
+    reset_rot_button.addEventListener('click', () => reset_rot());
+    settings_apply_rot_button.addEventListener('click', () => update_cipher_rot_result());
+
+    settings_rot.addEventListener('change', () => update_cipher_rot_result());
+
+    const cipher_stats_output = document.getElementById('cipher-stats');
+    const cipher_stats_rot_output = document.getElementById('cipher-stats-rot');
+
+    const update_stats = () => {
+        const cipher_stats = {};
+        const cipher_stats_rot = {};
+        cipher_text.split('').forEach((c) => {
+            if (rot_letters.includes(c)) {
+                cipher_stats[c] = (cipher_stats[c] || 0) + 1;
+            }
+        });
+        cipher_output_rot.textContent.split('').forEach((c) => {
+            if (rot_letters.includes(c)) {
+                cipher_stats_rot[c] = (cipher_stats_rot[c] || 0) + 1;
+            }
+        });
+        cipher_stats_output.innerHTML = '<ol>' + Object.keys(cipher_stats).sort((a, b) => cipher_stats[b] - cipher_stats[a]).map((c) => {
+            console.log(c);
+            return `<li>${c}: ${cipher_stats[c]}</li>` 
+        }).join('') + '</ol>';
+        cipher_stats_rot_output.innerHTML = '<ol>' + Object.keys(cipher_stats_rot).sort((a, b) => cipher_stats_rot[b] - cipher_stats_rot[a]).map((c) => {
+            console.log(c);
+            return `<li>${c}: ${cipher_stats_rot[c]}</li>` 
+        }).join('') + '</ol>';
+    }
+
+    reset_columns();
+
+
+
     const eventStats = events.reduce((stats, event, i) => {
         const diff = i > 0 ? Math.floor((event.date - events[i-1].date) / (1000 * 60 * 60)) : 0;
         event.diff = diff;
@@ -177,4 +303,6 @@ orthogonal.onReady(($linear, $dom) => {
     document.querySelector('.button--zoom-in').addEventListener('click', (e) => updatePosition(50, true));
     document.querySelector('.button--left').addEventListener('click', (e) => updatePosition(-50, false));
     document.querySelector('.button--right').addEventListener('click', (e) => updatePosition(50, false));
+
+    document.querySelector('.button--cipher').addEventListener('click', (e) => document.querySelector('.timeline').classList.toggle('cipher__active'));
 });

@@ -5,8 +5,14 @@
         margin: 0;
         padding: 0;
 
+        &__axis,
+        &__events,
+        &__cipher {
+            transition: all .5s ease-in-out;
+        }
+
         &__axis {
-            @include position-absolute($top: 40%, $left: 0, $right: 0, $z-index: -1);
+            @include position-absolute($top: 50%, $left: 0, $right: 0, $z-index: -1);
             width: 100%;
             height: 4rem;
             background-image: linear-gradient(to right,
@@ -32,11 +38,147 @@
 
         }
 
+        &__cipher {
+            @extend %flex,
+                %flex--row,
+                %flex--wrap,
+                %flex--justify-center,
+                %flex--align-center;
+            @include position-absolute($top: 0, $left: 50%, $z-index: 10);
+            width: 100vw;
+            height: 0;
+            overflow: hidden;
+            transform: translateX(-50%);
+            transition: height .5s ease-in-out;
+
+            .cipher__section {
+                @extend %flex;
+
+                &--text {
+                    @extend %flex--row;
+    
+                    pre {
+                        @include flex-item-width(33%);
+                    }
+                }
+                &--stats {
+                    @extend %flex--column;
+                    height: auto;
+                }
+            }
+
+
+            .cipher__content {
+                @extend %font--monospace,
+                    %font--x-small;
+                line-height: 2rem;
+                padding: .5rem;
+                background: var(--color-text);
+                color: var(--color-primary);
+                letter-spacing: 1rem;
+
+                &:first-line {
+                    color: var(--color-background);
+                }
+                &--output {
+                    margin-left: 2rem;
+                    color: var(--color-secondary);
+
+                    &--rot {
+                        color: var(--color-tertiary);
+                    }
+                }
+            }
+
+            .cipher__stats,
+            .cipher__settings {
+                @extend %flex,
+                    %flex--column,
+                    %flex--justify-center,
+                    %flex--align-center;
+            }
+
+            .cipher__stats {
+                @extend %font--monospace,
+                    %font--xx-small;
+
+                ol {
+                    @extend %flex,
+                        %flex--row,
+                        %flex--wrap;
+                    @include margin(0);
+                    list-style: none; 
+                    counter-reset: li;
+
+                    li {
+                        flex-basis: 18.25%;
+                        color: var(--color-background);
+                        counter-increment: li;
+
+                        &:before {
+                            content: counter(li, decimal-leading-zero);
+                            color: var(--color-primary);
+                            display: inline-block;
+                            width: 2.5rem;
+                            margin-left: -2.5rem;
+                        }
+                    }
+                }
+            }
+            .cipher__settings {
+                @include margin-top(2);
+                .settings {
+                    @include flex-item-width(90%);
+
+                    h4 {
+                        @extend %font--base;
+                        @include margin(0);
+                        line-height: 2;
+                        &:first-letter {
+                            @extend %font--gothic;
+                        }
+                    }
+
+                    &__field {
+                        @extend %flex,
+                            %flex--inline,
+                            %flex--justify-center,
+                            %flex--align-center,
+                            %font--monospace,
+                            %font--small;
+
+                        height: 4rem;
+                        background-color: var(--color-background);
+                        color: var(--color-text);
+
+                        &, &:focus, &:active {
+                            border: none;
+                            outline: none;
+                        }
+                        &:focus {
+                            color: var(--color-secondary);
+                            border-bottom: 2px color var(--color-secondary);
+                        }
+
+                        &--input {
+                            margin-right: 1rem;
+                            width: 10em;
+                        }
+                        &--button {
+                            i {
+                                font-size: .85em;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         &__controls {
             @extend %flex,
                 %flex--justify-space-between;
             @include position-absolute($bottom: 2rem, $left: 50%, $z-index: 10);
-            width: 400px;
+            width: 500px;
 
             transform: translateX(-50%);
             .buttons {
@@ -57,6 +199,18 @@
                     outline: none;
                 }
             }
+        }
+    }
+
+    .timeline.cipher__active {
+        .timeline__cipher {
+            height: 50vh;
+        }
+        .timeline__events {
+            top: 50%;
+        }
+        .timeline__axis {
+            top: 60%;
         }
     }
 
@@ -123,7 +277,7 @@
         }
         &--highlight {
             outline: 1rem solid var(--color-text);
-            transform: translateY(-150%);
+            transform: translateY(-100%);
 
             &--primary {
                 outline-color: var(--color-primary);
