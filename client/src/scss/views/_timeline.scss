@@ -9,6 +9,12 @@
         &__events,
         &__cipher {
             transition: all .5s ease-in-out;
+
+            .axis__position {
+                @extend %flex,
+                    %flex--column;
+                width: 250px;
+            }
         }
 
         &__axis {
@@ -26,15 +32,10 @@
             ),
                 repeating-linear-gradient(to right, transparent 0, 1.5rem, var(--color-primary) 1.5rem, var(--color-secondary) 3rem)
             ;
-            background-size: 4rem 4rem;
-            background-repeat: repeat-x;
+            height: 4rem;
 
             .axis__position {
-                @extend %flex,
-                    %flex--column;
-                width: 220px;
-
-                time {
+                .axis__time {
                     @extend %font--gothic, %font--large, %font--black;
                     color: var(--color-background);
                 }
@@ -47,12 +48,6 @@
                 %flex--justify-center;
             width: 100%;
             transform-style: preserve-3d;
-
-            .axis__position {
-                @extend %flex,
-                    %flex--column;
-                width: 220px;
-            }
         }
 
         &__cipher {
